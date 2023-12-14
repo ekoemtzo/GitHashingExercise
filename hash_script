@@ -1,0 +1,16 @@
+#!/usr/bin/env fish 
+
+read -P "Enter a 4-digit integer:" input
+
+#Check if the user gave a 4-digit integer
+if not string match -rq '^[0-9]{4}$' $input 
+	echo "Invalid"
+	exit 1
+end
+
+#Hash output
+set val (echo -n $input | sha256sum | cut -d ' ' -f1)
+
+echo "The hash of the $input is:"
+echo  $val
+echo $val > hash_output.txt
